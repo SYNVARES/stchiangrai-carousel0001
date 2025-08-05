@@ -6,33 +6,38 @@
   <style>
     body {
       font-family: sans-serif;
-      margin: 10px;
+      margin: 10px; /* ลดพื้นที่รอบขอบ */
+      background: #f2f2f2;
     }
 
     h3 {
       color: #a30000;
+      margin-bottom: 10px;
     }
 
     .product-scroll {
       display: flex;
       overflow-x: auto;
-      gap: 16px;
-      padding: 0px 0;
+      gap: 12px;
+      padding: 5px 0; /* ลด padding ด้านบน/ล่าง */
+      max-height: 250px; /* จำกัดความสูงของ container */
     }
 
     .product-card {
       flex: 0 0 auto;
-      width: 180px;
+      width: 160px;
       background: white;
       border: 1px solid #ccc;
       border-radius: 8px;
       text-align: center;
-      padding: 10px;
+      padding: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .product-card img {
       width: 100%;
       border-radius: 6px;
+      margin-bottom: 6px;
     }
 
     .product-scroll::-webkit-scrollbar {
@@ -42,6 +47,16 @@
     .product-scroll::-webkit-scrollbar-thumb {
       background: #ccc;
       border-radius: 3px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    small {
+      font-size: 12px;
+      color: #555;
     }
   </style>
 </head>
@@ -60,7 +75,7 @@
     <p>ขาวเกลี้ยง 3 แพ็ค</p>
     <small>ซื้อ 3 ฟรี 1</small>
   </div>
-  <!-- เพิ่มสินค้าได้ตามต้องการ -->
+  <!-- เพิ่มสินค้าเพิ่มเติมได้ที่นี่ -->
 </div>
 
 </body>
