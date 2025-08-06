@@ -104,9 +104,9 @@
 <script>
   const carousel = document.getElementById('carousel');
   const items = Array.from(carousel.children);
-  const cardWidth = items[0].offsetWidth + 12;
+  const cardWidth = items[0].offsetWidth + 12; // รวมช่องว่าง gap
 
-  // 🔁 Clone ทุกการ์ดซ้ำเพื่อเลื่อนต่อเนื่อง
+  // 🔁 Clone สินค้าท้ายมาต่อ เพื่อเลื่อนแบบลูป
   items.forEach(item => {
     const clone = item.cloneNode(true);
     carousel.appendChild(clone);
@@ -114,19 +114,19 @@
 
   let scrollAmount = 0;
 
-  function scrollSmoothLoop() {
-    scrollAmount += 0.5; // ปรับความเร็วตรงนี้
-    if (scrollAmount >= cardWidth * items.length) {
-      scrollAmount = 0;
-      carousel.scrollLeft = 0;
-    } else {
-      carousel.scrollLeft = scrollAmount;
-    }
-    requestAnimationFrame(scrollSmoothLoop);
-  }
+  setInterval(() => {
+    scrollAmount += cardWidth;
 
-  scrollSmoothLoop(); // เริ่มเลื่อน
+    if (scrollAmount >= cardWidth * items.length) {
+      // รีเซ็ตแบบไม่กระตุก
+      scrollAmount = 0;
+      carousel.scrollTo({ left: 0, behavior: 'auto' });
+    } else {
+      carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }, 3000);
 </script>
+
 
 </body>
 </html>
