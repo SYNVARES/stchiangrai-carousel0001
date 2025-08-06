@@ -135,7 +135,7 @@
   setInterval(() => {
     scrollAmount += cardWidth;
 
-    if (scrollAmount >= cardWidth * items.length) {
+    if (scrollAmount >= cardWidth * (carousel.children.length / 2)) {
       // รีเซ็ตแบบไม่กระตุก
       scrollAmount = 0;
       carousel.scrollTo({ left: 0, behavior: 'auto' });
