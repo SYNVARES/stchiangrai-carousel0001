@@ -2,8 +2,13 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>สินค้าราคาพิเศษ</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: sans-serif;
       margin: 5px;
@@ -13,11 +18,14 @@
     h3 {
       color: #a30000;
       margin-bottom: 5px;
+      font-size: 18px;
     }
 
     .carousel-container {
       overflow: hidden;
       position: relative;
+      width: 100%;
+      max-width: 100%;
     }
 
     .product-scroll {
@@ -33,6 +41,7 @@
     .product-card {
       flex: 0 0 auto;
       width: 320px;
+      max-width: 80vw;
       background: white;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -43,6 +52,7 @@
 
     .product-card img {
       width: 100%;
+      height: auto;
       border-radius: 6px;
       margin-bottom: 6px;
     }
@@ -94,9 +104,9 @@
 <script>
   const carousel = document.getElementById('carousel');
   const items = Array.from(carousel.children);
-  const cardWidth = items[0].offsetWidth + 12; // รวมช่องว่าง gap
+  const cardWidth = items[0].offsetWidth + 12;
 
-  // 🔁 Clone สินค้าท้ายมาต่อ เพื่อเลื่อนแบบลูป
+  // 🔁 Clone ทุกการ์ดซ้ำเพื่อเลื่อนต่อเนื่อง
   items.forEach(item => {
     const clone = item.cloneNode(true);
     carousel.appendChild(clone);
@@ -104,19 +114,19 @@
 
   let scrollAmount = 0;
 
-  setInterval(() => {
-    scrollAmount += cardWidth;
-
+  function scrollSmoothLoop() {
+    scrollAmount += 0.5; // ปรับความเร็วตรงนี้
     if (scrollAmount >= cardWidth * items.length) {
-      // รีเซ็ตแบบไม่กระตุก
       scrollAmount = 0;
-      carousel.scrollTo({ left: 0, behavior: 'auto' });
+      carousel.scrollLeft = 0;
     } else {
-      carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      carousel.scrollLeft = scrollAmount;
     }
-  }, 3000);
-</script>
+    requestAnimationFrame(scrollSmoothLoop);
+  }
 
+  scrollSmoothLoop(); // เริ่มเลื่อน
+</script>
 
 </body>
 </html>
