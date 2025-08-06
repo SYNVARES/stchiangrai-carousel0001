@@ -10,29 +10,28 @@
     }
 
     body {
-      font-family: sans-serif;
-      margin: 5px;
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background: #f2f2f2;
+      font-family: sans-serif;
     }
 
-    h3 {
+   h3 {
       color: #a30000;
-      margin-bottom: 5px;
+      margin: 10px 0 5px 8px;
       font-size: 18px;
     }
 
     .carousel-container {
       overflow: hidden;
-      position: relative;
       width: 100%;
-      max-width: 100%;
     }
 
     .product-scroll {
       display: flex;
       gap: 12px;
-      padding: 5px 0;
-      max-height: 250px;
+      padding: 5px 8px;
       scroll-behavior: smooth;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -40,7 +39,7 @@
 
     .product-card {
       flex: 0 0 auto;
-      width: 320px;
+      width: 300px;
       max-width: 80vw;
       background: white;
       border: 1px solid #ccc;
@@ -102,9 +101,11 @@
 </div>
 
 <script>
-  const carousel = document.getElementById('carousel');
-  const items = Array.from(carousel.children);
-  const cardWidth = items[0].offsetWidth + 12; // รวมช่องว่าง gap
+  window.addEventListener('load', () => {
+    const carousel = document.getElementById('carousel');
+    const items = Array.from(carousel.children);
+    const gap = 12;
+    const cardWidth = items[0].offsetWidth + gap;
 
   // 🔁 Clone สินค้าท้ายมาต่อ เพื่อเลื่อนแบบลูป
   items.forEach(item => {
