@@ -126,18 +126,51 @@
   });
 
   let scrollAmount = 0;
+  let autoScroll;
+  let isUserInteracting = false;
 
-  setInterval(() => {
-    scrollAmount += cardWidth;
+  function startAutoScroll() {
+    autoScroll = setInterval(() => {
+    if (!isUserInteracting) {   // ✅ เลื่อนเฉพาะถ้า user ไม่ได้แตะ
+          scrollAmount += cardWidth;
 
     if (scrollAmount >= cardWidth * (carousel.children.length / 2)) {
-      // รีเซ็ตแบบไม่กระตุก
-      scrollAmount = 0;
-      carousel.scrollTo({ left: 0, behavior: 'auto' });
-    } else {
-      carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+          scrollAmount = 0;
+          carousel.scrollTo({ left: 0, behavior: 'auto' });
+          } else {
+          carousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+          }
+        }
+      }, 3000);
     }
-  }, 3000);
+
+   function stopAutoScroll() {
+      clearInterval(autoScroll);
+    }
+
+    // 🎯 Event จับการแตะ/ลาก/ปล่อย
+    carousel.addEventListener('touchstart', () => {
+      isUserInteracting = true;
+      stopAutoScroll();
+    });
+
+    carousel.addEventListener('mousedown', () => {
+      isUserInteracting = true;
+      stopAutoScroll();
+    });
+
+    carousel.addEventListener('touchend', () => {
+      isUserInteracting = false;
+      startAutoScroll();
+    });
+
+    carousel.addEventListener('mouseup', () => {
+      isUserInteracting = false;
+      startAutoScroll();
+    });
+
+    // ▶️ เริ่ม auto scroll
+    startAutoScroll();
   });
 </script>
 
